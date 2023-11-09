@@ -2,29 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product';
 import { ProductRepository } from '../models/product.repository';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { ProductService } from 'src/services/product.service';
 
 @Component({
   selector: 'product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
+  providers: [ProductService]
 })
 export class ProductListComponent implements OnInit {
 
-  products : Product[];
-  productRepository:ProductRepository
+  products : Product[] = [];
 
-  constructor(private route: ActivatedRoute) {
-    this.productRepository = new ProductRepository();
+  constructor(
+    private route: ActivatedRoute,
+    private productService: ProductService) {
   }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      if(params["categoryId"]){
-        this.products = this.productRepository.getProductsByCategoryId(params["categoryId"]);
-      }else{
-        this.products = this.productRepository.getProducts();
+        this.productService.getProducts(params["categoryId"]).subscribe(data => {
+          this.products = data;
+          })
+        });
       }
-    });
-  }
-
-}
+    }
+  
