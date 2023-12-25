@@ -13,6 +13,7 @@ import { Category } from '../models/category';
 export class ProductCreateComponent implements OnInit {
 
   categories: Category[] = [];
+  error: string =" ";
 
   constructor(
     private productService: ProductService,
@@ -27,6 +28,34 @@ export class ProductCreateComponent implements OnInit {
 
   saveProduct(name:any, price:any, imageUrl:any, description:any, isActive:any, categoryId:any){
    
+    if(name.value == "" || name.value.length < 5) {
+      this.error = "ürün ismi en az 5 karakter giriniz.";
+      return;
+    }
+
+    if(price.value == "") {
+      this.error ="ürün fiyatı girmelisiniz.";
+      return;
+    }
+
+    if(imageUrl.value == "") {
+      this.error ="resim ismi girmelisiniz.";
+      return;
+    }
+
+    const extensions = ["jpeg","jpg","png"];
+    const extension = imageUrl.value.split(".").pop();
+
+    if(extensions.indexOf(extension) == -1) {
+      this.error ="resim uzantısı sadece jpeg, jpg, png olmalıdır.";
+      return;
+    }
+
+    if(categoryId.value == "0") {
+      this.error ="kategori seçmelisiniz.";
+      return;
+    }
+
       const product = {
         id: 1,
         name: name.value,
