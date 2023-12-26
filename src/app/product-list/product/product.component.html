@@ -1,4 +1,5 @@
-<div class="card mb-3 p-1" *ngIf="product else noProduct" >
+<div *ngIf="!loading">
+    <div class="card mb-3 p-1" *ngIf="product else noProduct" >
     <div class="row">
         <div class="col-3">
             <img src="/assets/images/{{ product.imageUrl }}" alt="" class="img-fluid rounded-start">
@@ -11,6 +12,8 @@
         </div>
     </div>
 </div>
+</div>
+
 
 <ng-template #noProduct>
    
@@ -19,5 +22,9 @@
     </div>
      
     </ng-template>
+
+    <div *ngIf="loading" class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
     
     

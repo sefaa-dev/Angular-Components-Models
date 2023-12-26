@@ -3,6 +3,7 @@ import { Route, Router } from '@angular/router';
 import { CategoryService } from 'src/services/category.service';
 import { ProductService } from 'src/services/product.service';
 import { Category } from '../models/category';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-product-create',
@@ -14,6 +15,11 @@ export class ProductCreateComponent implements OnInit {
 
   categories: Category[] = [];
   error: string =" ";
+  model: any = {
+    name: "iphone 17",
+    price: 2000,
+    categoryId: "0"
+  };
 
   constructor(
     private productService: ProductService,
@@ -26,50 +32,41 @@ export class ProductCreateComponent implements OnInit {
     })
   }
 
-  saveProduct(name:any, price:any, imageUrl:any, description:any, isActive:any, categoryId:any){
+  saveProduct(form: NgForm){
    
-    if(name.value == "" || name.value.length < 5) {
-      this.error = "ürün ismi en az 5 karakter giriniz.";
-      return;
-    }
-
-    if(price.value == "") {
-      this.error ="ürün fiyatı girmelisiniz.";
-      return;
-    }
-
-    if(imageUrl.value == "") {
-      this.error ="resim ismi girmelisiniz.";
-      return;
-    }
 
     const extensions = ["jpeg","jpg","png"];
-    const extension = imageUrl.value.split(".").pop();
+    const extension = this.model.imageUrl.split(".").pop();
 
     if(extensions.indexOf(extension) == -1) {
       this.error ="resim uzantısı sadece jpeg, jpg, png olmalıdır.";
       return;
     }
 
-    if(categoryId.value == "0") {
+    if(this.model.categoryId == "0") {
       this.error ="kategori seçmelisiniz.";
       return;
     }
 
       const product = {
         id: 1,
-        name: name.value,
-        price: price.value,
-        imageUrl: imageUrl.value,
-        description: description.value,
-        isActive: isActive.checked,
-        categoryId: categoryId.value
+        name: this.model.name,
+        price: this.model.price,
+        imageUrl: this.model.imageUrl,
+        description: this.model.description,
+        isActive: this.model.isActive,
+        categoryId: this.model.categoryId
       }
-  
-      this.productService.createProduct(product).subscribe(data => {
+      if(form.valid){
+        this.productService.createProduct(product).subscribe(data => {
          this.router.navigate(['/products']);
-    });
+      }); 
+    }else{
+      this.error ="formu kontrol ediniz.";
+      
+    }
     
+    console.log(this.model)
   }
 
 }
