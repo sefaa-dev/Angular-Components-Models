@@ -1,5 +1,4 @@
 <h3>Product Create</h3>
-{{ model | json }}
 
 <form #form="ngForm" (ngSubmit)="saveProduct(form)">
     <div class="alert alert-danger" *ngIf="error">
@@ -25,7 +24,7 @@
     </div>
     <div class="mb-3">
         <label for="description" class="form-label">description</label>
-        <textarea [(ngModel)]="model.description" name="description" id="description" class="form-control"></textarea>
+        <ckeditor [(ngModel)]="model.description" name="description" id="description" ></ckeditor>
     </div>
     <div class="form-check mb-3">
         <input [(ngModel)]="model.isActive" type="checkbox" name="isActive" id="isActive" class="form-check-input">

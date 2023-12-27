@@ -7,8 +7,14 @@
         <div class="col-9">
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
-                <p class="cart-text">{{ product.description }}</p>
             </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="cart-text" [innerHTML]="product.description"></p>
+
         </div>
     </div>
 </div>
