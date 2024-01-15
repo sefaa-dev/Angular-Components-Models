@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/services/product.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'product',

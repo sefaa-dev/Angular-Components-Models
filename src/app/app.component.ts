@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ProductService } from 'src/services/product.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: '#app',

@@ -3,7 +3,7 @@ import { Product } from '../models/product';
 import { ProductRepository } from '../models/product.repository';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { ProductService } from 'src/services/product.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'product-list',
