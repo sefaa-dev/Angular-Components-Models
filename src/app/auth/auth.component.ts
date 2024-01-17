@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthResponse } from '../models/auth-response';
 import { ThisReceiver } from '@angular/compiler';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -16,7 +17,10 @@ export class AuthComponent implements OnInit {
   loading: boolean = false;
   error: string =" ";  
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
   }
@@ -44,9 +48,10 @@ export class AuthComponent implements OnInit {
     };
 
     authResponse.subscribe({
-      next: (response) => {
+      next: () => {
         this.loading = false;
         this.error = " ";
+        this.router.navigate(["/"]);
       },
 
       error: (err) => {
