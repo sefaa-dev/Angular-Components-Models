@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Category } from 'src/app/models/category';
+import { Category } from 'src/app/categories/category.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class CategoryService {
 
-    private url = "https://ng-shopapp-c9feb-default-rtdb.firebaseio.com/";
+  private url = environment.database_url;
 
 
   constructor(private http: HttpClient) { }

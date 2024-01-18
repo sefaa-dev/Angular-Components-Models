@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
-import { AuthService } from './services/auth.service';
+import { ProductService } from 'src/app/products/product.service';
+import { AuthService } from './authentication/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: '#app',
@@ -16,6 +17,8 @@ constructor(private authService: AuthService){
 
   ngOnInit(): void {
       this.authService.autoLogin();
+      console.log(environment.adminEmail)
+      console.log(environment.production)
   }
 
  

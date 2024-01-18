@@ -1,8 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, delay, exhaustMap, map, take, tap } from "rxjs";
-import { Product } from "src/app/models/product";
-import { AuthService } from "./auth.service";
+import { Product } from "src/app/products/product.model";
+import { AuthService } from "../authentication/auth.service";
+import { environment } from "src/environments/environment";
 
 //local service
 @Injectable()
@@ -10,7 +11,7 @@ import { AuthService } from "./auth.service";
 export class ProductService{
     [x: string]: any;
 
-    private url = "https://ng-shopapp-c9feb-default-rtdb.firebaseio.com/";
+    private url = environment.database_url;
 
     constructor(private http: HttpClient, private authService: AuthService){
          

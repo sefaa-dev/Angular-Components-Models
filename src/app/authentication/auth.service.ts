@@ -1,9 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, LOCALE_ID } from '@angular/core';
-import { AuthResponse } from '../models/auth-response';
+import { AuthResponse } from './auth-response.model';
 import { BehaviorSubject, Subject, catchError, tap, throwError } from 'rxjs';
-import { User } from '../models/users';
+import { User } from './users.model';
 import { JsonPipe } from '@angular/common';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import { JsonPipe } from '@angular/common';
 })
 export class AuthService {
 
-  api_key = "AIzaSyC43d59Hr6zxVDyulVBXALmmrR_zTYotqY";
+  api_key = environment.api_key;
   user = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient) { }
